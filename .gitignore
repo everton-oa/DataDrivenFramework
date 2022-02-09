@@ -1,0 +1,4 @@
+target/
+.project
+.classpath
+src/test/resources/logs/
