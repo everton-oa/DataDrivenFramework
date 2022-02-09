@@ -1,3 +1,5 @@
 /src/test/resources/logs
 /target
 test-output/
+.idea/
+target/
