@@ -1,9 +1,9 @@
-05:22:20,601 DEBUG devpinoyLogger:53 - Config file loaded
-05:22:20,603 DEBUG devpinoyLogger:67 - OR file loaded
-05:22:22,040 DEBUG devpinoyLogger:75 - Chrome launched
-05:22:25,175 DEBUG devpinoyLogger:82 - URL opened
-05:22:25,963 DEBUG devpinoyLogger:82 - URL opened
-05:22:26,011 DEBUG devpinoyLogger:12 - Starting login test
-05:22:28,627 DEBUG devpinoyLogger:15 - Login test successfully executed
-05:22:28,709 DEBUG devpinoyLogger:95 - Test execution completed
-05:22:28,776 DEBUG devpinoyLogger:95 - Test execution completed
+05:26:17,837 DEBUG devpinoyLogger:53 - Config file loaded
+05:26:17,839 DEBUG devpinoyLogger:67 - OR file loaded
+05:26:19,768 DEBUG devpinoyLogger:75 - Chrome launched
+05:26:22,812 DEBUG devpinoyLogger:82 - URL opened
+05:26:23,981 DEBUG devpinoyLogger:82 - URL opened
+05:26:24,032 DEBUG devpinoyLogger:12 - Starting login test
+05:26:26,779 DEBUG devpinoyLogger:15 - Login test successfully executed
+05:26:26,938 DEBUG devpinoyLogger:95 - Test execution completed
+05:26:26,988 DEBUG devpinoyLogger:95 - Test execution completed
