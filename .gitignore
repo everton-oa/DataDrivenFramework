@@ -1,6 +1,14 @@
-/src/test/resources/logs
-/target
+# Log folders
+src/test/resources/logs
+
+# Report folders
 test-output/
-.idea/
 target/
-.~lock.testdata.xlsx#
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# IntelliJ files
+.idea/
