@@ -3,3 +3,4 @@
 test-output/
 .idea/
 target/
+.~lock.testdata.xlsx#
