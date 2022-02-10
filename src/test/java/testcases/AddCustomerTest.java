@@ -1,6 +1,9 @@
 package testcases;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,12 +12,17 @@ import base.TestBase;
 public class AddCustomerTest extends TestBase{
 	
 	@Test(dataProvider="getData")
-	public void addCustomerTest(String firstName, String lastName, String postCode) {
+	public void addCustomerTest(String firstName, String lastName, String postCode, String alertText) {
 		driver.findElement(By.cssSelector(OR.getProperty("addCustomerBtn"))).click();
 		driver.findElement(By.cssSelector(OR.getProperty("firstNameField"))).sendKeys(firstName);
 		driver.findElement(By.cssSelector(OR.getProperty("lastNameField"))).sendKeys(lastName);
 		driver.findElement(By.cssSelector(OR.getProperty("postCodeField"))).sendKeys(postCode);
 		driver.findElement(By.cssSelector(OR.getProperty("addBtn"))).click();
+		
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		
+		Assert.assertTrue(alert.getText().contains(alertText));
+		alert.accept();
 	}
 	
 	@DataProvider
