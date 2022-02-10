@@ -1,7 +1,5 @@
 package base;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,11 +7,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
+import utilities.ExcelReader;
 
 public class TestBase {
 
@@ -36,8 +38,8 @@ public class TestBase {
 	public static Properties OR = new Properties();
 	public static FileInputStream fis;
 	public static Logger log = Logger.getLogger("devpinoyLogger");
+	public static ExcelReader excel = new ExcelReader(System.getProperty("user.dir") + "/src/test/resources/excel/testdata.xlsx");
 
-	@BeforeMethod
 	@BeforeSuite
 	public void setUp() {
 		if (driver == null) {
@@ -86,12 +88,20 @@ public class TestBase {
 
 	}
 
-	@AfterMethod
 	@AfterSuite
 	public void tearDown() {
 		if (driver != null) {
 			driver.quit();
 		}
 		log.debug("Test execution completed");
+	}
+	
+	public boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
 	}
 }
