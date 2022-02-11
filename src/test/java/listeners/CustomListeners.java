@@ -7,20 +7,23 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import utilities.TestUtil;
 
-public class CustomListeners implements ITestListener {
+public class CustomListeners extends TestBase implements ITestListener {
 
 	@Override
 	public void onTestStart(ITestResult result) {
-		// TODO Auto-generated method stub
-
+		test = rep.startTest(result.getName().toUpperCase());
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		// TODO Auto-generated method stub
-
+		test.log(LogStatus.PASS, result.getName().toUpperCase()+" PASS");
+		rep.endTest(test);
+		rep.flush();
 	}
 
 	@Override
@@ -32,10 +35,17 @@ public class CustomListeners implements ITestListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		test.log(LogStatus.FAIL, result.getName().toUpperCase()+" FAIL - "+result.getThrowable());
+		test.log(LogStatus.FAIL, test.addScreenCapture(TestUtil.screenShotName));
+		
 		Reporter.log("Test failed - Capturing screenshot");
 		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\">Screenshot</a>");
 		Reporter.log("<br>");
 		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\"><img src="+TestUtil.screenShotName+" height=200 width=200></img></a>");
+		
+		rep.endTest(test);
+		rep.flush();
 	}
 
 	@Override
