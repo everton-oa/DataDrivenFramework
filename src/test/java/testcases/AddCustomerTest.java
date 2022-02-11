@@ -3,7 +3,7 @@ package testcases;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.AssertJUnit;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -21,7 +21,7 @@ public class AddCustomerTest extends TestBase{
 		
 		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 		
-		AssertJUnit.assertTrue(alert.getText().contains(alertText));
+		Assert.assertTrue(alert.getText().contains(alertText));
 		alert.accept();
 	}
 	
