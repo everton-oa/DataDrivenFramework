@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.SkipException;
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -17,11 +18,14 @@ public class CustomListeners extends TestBase implements ITestListener {
 	@Override
 	public void onTestStart(ITestResult result) {
 		test = rep.startTest(result.getName().toUpperCase());
+		// Check run mode from excel sheet
+		if (!TestUtil.isTestRunnable(result.getName().toUpperCase(), excel))
+			throw new SkipException(result.getName() + " - Test skipped: Run mode is No");
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		test.log(LogStatus.PASS, result.getName().toUpperCase()+" PASS");
+		test.log(LogStatus.PASS, result.getName().toUpperCase() + " PASS");
 		rep.endTest(test);
 		rep.flush();
 	}
@@ -35,20 +39,22 @@ public class CustomListeners extends TestBase implements ITestListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		test.log(LogStatus.FAIL, result.getName().toUpperCase()+" FAIL - "+result.getThrowable());
+		test.log(LogStatus.FAIL, result.getName().toUpperCase() + " FAIL - " + result.getThrowable());
 		test.log(LogStatus.FAIL, test.addScreenCapture(TestUtil.screenShotName));
 		Reporter.log("Test failed - Capturing screenshot");
-		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\">Screenshot</a>");
+		Reporter.log("<a target=\"_blank\" href=\"" + TestUtil.screenShotName + "\">Screenshot</a>");
 		Reporter.log("<br>");
-		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\"><img src="+TestUtil.screenShotName+" height=200 width=200></img></a>");
+		Reporter.log("<a target=\"_blank\" href=\"" + TestUtil.screenShotName + "\"><img src=" + TestUtil.screenShotName
+				+ " height=200 width=200></img></a>");
 		rep.endTest(test);
 		rep.flush();
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
-		// TODO Auto-generated method stub
-
+		test.log(LogStatus.SKIP, result.getName().toUpperCase()+" - Test skipped: Run mode is No");
+		rep.endTest(test);
+		rep.flush();
 	}
 
 	@Override

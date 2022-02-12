@@ -12,7 +12,7 @@ import base.TestBase;
 public class BankManagerLoginTest extends TestBase{
 	
 	@Test
-	public void login() throws InterruptedException, IOException {
+	public void bankManagerLoginTest() throws InterruptedException, IOException {
 		verifyEquals(driver.getTitle(), "Page Title");
 		log.debug("Starting login test");
 		click("bankManagerLoginBtn_CSS");
