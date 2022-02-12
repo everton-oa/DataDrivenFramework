@@ -1,5 +1,7 @@
 package testcases;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -10,7 +12,8 @@ import base.TestBase;
 public class BankManagerLoginTest extends TestBase{
 	
 	@Test
-	public void login() throws InterruptedException {
+	public void login() throws InterruptedException, IOException {
+		verifyEquals(driver.getTitle(), "Page Title");
 		log.debug("Starting login test");
 		click("bankManagerLoginBtn_CSS");
 		Thread.sleep(2000);
