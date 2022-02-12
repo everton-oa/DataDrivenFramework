@@ -19,4 +19,10 @@
 		</classes>
 	</test> <!-- Test -->
 
+	<test thread-count="5" name="Open Account Test">
+		<classes>
+			<class name="testcases.OpenAccountTest" />
+		</classes>
+	</test> <!-- Test -->
+
 </suite> <!-- Suite -->
