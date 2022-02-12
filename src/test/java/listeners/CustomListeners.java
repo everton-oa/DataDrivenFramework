@@ -35,15 +35,12 @@ public class CustomListeners extends TestBase implements ITestListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		test.log(LogStatus.FAIL, result.getName().toUpperCase()+" FAIL - "+result.getThrowable());
 		test.log(LogStatus.FAIL, test.addScreenCapture(TestUtil.screenShotName));
-		
 		Reporter.log("Test failed - Capturing screenshot");
 		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\">Screenshot</a>");
 		Reporter.log("<br>");
 		Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\"><img src="+TestUtil.screenShotName+" height=200 width=200></img></a>");
-		
 		rep.endTest(test);
 		rep.flush();
 	}

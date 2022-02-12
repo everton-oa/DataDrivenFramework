@@ -1,5 +1,7 @@
 package base;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -22,6 +25,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import utilities.ExcelReader;
 import utilities.ExtentManager;
+import utilities.TestUtil;
 
 public class TestBase {
 
@@ -106,6 +110,10 @@ public class TestBase {
 		log.debug("Test execution completed");
 	}
 	
+	
+	/*
+	 * Keyword actions
+	 */
 	public void click(String locator) {
 		if (locator.endsWith("_CSS")) {
 			driver.findElement(By.cssSelector(OR.getProperty(locator))).click();
@@ -136,4 +144,23 @@ public class TestBase {
 			return false;
 		}
 	}
+	
+	/*
+	 * Assertions
+	 */
+	public static void verifyEquals(String actual, String expected) throws IOException {
+		try {
+			assertEquals(actual, expected);
+		} catch (Throwable t) {
+			TestUtil.captureScreenShot();
+			//ReportNg
+			Reporter.log("<br>"+"Verification failed - "+t.getMessage()+"<br>");
+			Reporter.log("<a target=\"_blank\" href=\""+TestUtil.screenShotName+"\"><img src="+TestUtil.screenShotName+" height=200 width=200></img></a>");
+			Reporter.log("<br>");
+			//Extent Reports
+			test.log(LogStatus.FAIL, "Verification failed - "+t.getMessage());
+			test.log(LogStatus.FAIL, test.addScreenCapture(TestUtil.screenShotName));
+		}
+	}
+	
 }
