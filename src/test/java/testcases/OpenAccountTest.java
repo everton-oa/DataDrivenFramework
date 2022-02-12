@@ -2,7 +2,6 @@ package testcases;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.TestBase;
